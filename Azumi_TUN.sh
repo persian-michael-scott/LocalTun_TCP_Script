@@ -108,7 +108,7 @@ install() {
     apt install unzip -y
     apt install jq -y
 
-    read -p "Do you want to install the latest version? (y/n): " answer
+    read -p "Do you want to install the latest version of Azumi LocalTun_TCP ? (y/n): " answer
     if [[ "$answer" == [Yy]* ]]; then
         # Get the latest release URL
         url=$(get_latest_release_url)
@@ -193,15 +193,15 @@ Forward_Tun() {
             read -p "Enter Kharej IPv4 ) : " KHAREJ_IPV4
             arguments="-server-addr $KHAREJ_IPV4 -server-port 800 -client-private 30.0.0.2 -server-private 30.0.0.1 -subnet 24 -device tun2 -key azumi -mtu 1400 -verbose true -smux true -heartbeat true -tcp-nodelay true -service-name azumilocal"
             setup_service "$file" "$arguments"
-            echo "${GREEN}Local IPv4 Kharej 30.0.0.1${NC}"
-            echo "${BLUE}Local IPv4 Iran 30.0.0.2${NC}"
+            echo -e "${GREEN}Local IPv4 Kharej 30.0.0.1${NC}"
+            echo -e "${BLUE}Local IPv4 Iran 30.0.0.2${NC}"
             ;;
         2)
             file="tun-server_$arch_name"
             arguments="-server-port 800 -server-private 30.0.0.1 -client-private 30.0.0.2 -subnet 24 -device tun2 -key azumi -mtu 1480 -verbose true -smux true -heartbeat true -tcp-nodelay true -service-name azumilocal"
             setup_service "$file" "$arguments"
-            echo "${GREEN}Local IPv4 Kharej 30.0.0.1${NC}"
-            echo "${BLUE}Local IPv4 Iran 30.0.0.2${NC}"
+            echo -e "${GREEN}Local IPv4 Kharej 30.0.0.1${NC}"
+            echo -e "${BLUE}Local IPv4 Iran 30.0.0.2${NC}"
             ;;
         *) echo -e "${RED}Invalid option!${NC}" && exit ;;
     esac
@@ -219,16 +219,16 @@ Reverse_Tun() {
             file="tun-server_$arch_name"
             arguments="-server-port 800 -server-private 30.0.0.1 -client-private 30.0.0.2 -subnet 24 -device tun2 -key azumi -mtu 1480 -verbose true -smux true -tcp-nodelay true -heartbeat true -heartbeat-interval 30"
             setup_service "$file" "$arguments"
-            echo "${GREEN}Local IPv4 Kharej 30.0.0.2${NC}"
-            echo "${BLUE}Local IPv4 Iran 30.0.0.1${NC}"
+            echo -e "${GREEN}Local IPv4 Kharej 30.0.0.2${NC}"
+            echo -e "${BLUE}Local IPv4 Iran 30.0.0.1${NC}"
             ;;
         2)
             file="tun-client_$arch_name"
             read -p "Enter Iran IPv4 ) : " IRAN_IPV4
             arguments="-server-addr $IRAN_IPV4 -server-port 800 -client-private 30.0.0.2 -server-private 30.0.0.1 -subnet 24 -device tun2 -key azumi -mtu 1400 -verbose true -smux true -tcp-nodelay true -heartbeat true -heartbeat-interval 30 -service-name azumilocal"
             setup_service "$file" "$arguments"
-            echo "${GREEN}Local IPv4 Kharej 30.0.0.2${NC}"
-            echo "${BLUE}Local IPv4 Iran 30.0.0.1${NC}"
+            echo -e "${GREEN}Local IPv4 Kharej 30.0.0.2${NC}"
+            echo -e "${BLUE}Local IPv4 Iran 30.0.0.1${NC}"
             ;;
         *) echo -e "${RED}Invalid option!${NC}" && exit ;;
     esac
