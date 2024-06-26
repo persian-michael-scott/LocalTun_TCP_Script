@@ -1,6 +1,8 @@
 ```
 bash <(curl -Ls https://raw.githubusercontent.com/persian-michael-scott/LocalTun_TCP_Script/main/Azumi_TUN.sh)
 ```
+**دولوپر پروژه : https://github.com/Azumi67/LocalTun_TCP**
+
 # توضیحات
 در ابتدا اسکریپت رو روی سرور و سپس کلاینت اجرا کنید.
 در حالت Forward منظور از سرور، سرور خارج و کلاینت سرور ایران هست.
