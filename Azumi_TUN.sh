@@ -281,7 +281,7 @@ display_menu(){
     echo -e "${BLUE}2. Configure Reverse Tun (Private & Public IPv4)${NC}"
     echo -e "${RED}3. Stop & Remove service and files${NC}"
     echo -e "${YELLOW}4. Restart Service${NC}"
-    echo -e "${GREEN}5. Haproxy Script by Musixal${NC}"
+    echo -e "${GREEN}5. download Haproxy Script by Musixal${NC}"
     echo "6. Exit"
     echo "-------------------------------"
   }
@@ -293,7 +293,7 @@ read_option(){
         2) Reverse_Tun ;;
         3) destroy_service ;;
         4) reset_service ;;
-        5) wget -Nq https://github.com/Musixal/haproxy-tunnel/raw/main/haproxy.sh && bash haproxy.sh ;;
+        5) wget -Nq https://github.com/Musixal/haproxy-tunnel/raw/main/haproxy.sh ;;
         6) echo "Exiting..." && exit ;;
         *) echo -e "${RED}Invalid option!${NC}" && sleep 1 ;;
     esac
