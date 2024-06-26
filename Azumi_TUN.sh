@@ -162,6 +162,7 @@ ExecStart=/root/localTUN/$file $arg
 WantedBy=multi-user.target
 EOF
     chmod u+x /etc/systemd/system/azumilocal.service
+    systemctl daemon-reload
     systemctl enable /etc/systemd/system/azumilocal.service
     systemctl start azumilocal.service
 }
@@ -191,14 +192,14 @@ Forward_Tun() {
         1)
             file="tun-client_$arch_name"
             read -p "Enter Kharej IPv4 ) : " KHAREJ_IPV4
-            arguments="-server-addr $KHAREJ_IPV4 -server-port 800 -client-private 30.0.0.2 -server-private 30.0.0.1 -subnet 24 -device tun2 -key azumi -mtu 1400 -verbose true -smux true -heartbeat true -tcp-nodelay true -service-name azumilocal"
+            arguments="-server-addr $KHAREJ_IPV4 -server-port 800 -client-private 30.0.0.2 -server-private 30.0.0.1 -subnet 24 -device tun2 -key azumi -mtu 1400 -verbose true -smux true -heartbeat false -tcp-nodelay true -ping-interval 20 -service-name azumilocal"
             setup_service "$file" "$arguments"
             echo -e "${GREEN}Local IPv4 Kharej 30.0.0.1${NC}"
             echo -e "${BLUE}Local IPv4 Iran 30.0.0.2${NC}"
             ;;
         2)
             file="tun-server_$arch_name"
-            arguments="-server-port 800 -server-private 30.0.0.1 -client-private 30.0.0.2 -subnet 24 -device tun2 -key azumi -mtu 1480 -verbose true -smux true -heartbeat true -tcp-nodelay true -service-name azumilocal"
+            arguments="-server-port 800 -server-private 30.0.0.1 -client-private 30.0.0.2 -subnet 24 -device tun2 -key azumi -mtu 1480 -verbose true -smux true -heartbeat false -tcp-nodelay true -ping-interval 20 -service-name azumilocal"
             setup_service "$file" "$arguments"
             echo -e "${GREEN}Local IPv4 Kharej 30.0.0.1${NC}"
             echo -e "${BLUE}Local IPv4 Iran 30.0.0.2${NC}"
@@ -217,7 +218,7 @@ Reverse_Tun() {
     case $option in
         1)
             file="tun-server_$arch_name"
-            arguments="-server-port 800 -server-private 30.0.0.1 -client-private 30.0.0.2 -subnet 24 -device tun2 -key azumi -mtu 1480 -verbose true -smux true -tcp-nodelay true -heartbeat true -heartbeat-interval 30"
+            arguments="-server-port 800 -server-private 30.0.0.1 -client-private 30.0.0.2 -subnet 24 -device tun2 -key azumi -mtu 1480 -verbose true -smux true -tcp-nodelay true -heartbeat false -ping-interval 10 -service-name azumilocal"
             setup_service "$file" "$arguments"
             echo -e "${GREEN}Local IPv4 Kharej 30.0.0.2${NC}"
             echo -e "${BLUE}Local IPv4 Iran 30.0.0.1${NC}"
@@ -225,7 +226,7 @@ Reverse_Tun() {
         2)
             file="tun-client_$arch_name"
             read -p "Enter Iran IPv4 ) : " IRAN_IPV4
-            arguments="-server-addr $IRAN_IPV4 -server-port 800 -client-private 30.0.0.2 -server-private 30.0.0.1 -subnet 24 -device tun2 -key azumi -mtu 1400 -verbose true -smux true -tcp-nodelay true -heartbeat true -heartbeat-interval 30 -service-name azumilocal"
+            arguments="-server-addr $IRAN_IPV4 -server-port 800 -client-private 30.0.0.2 -server-private 30.0.0.1 -subnet 24 -device tun2 -key azumi -mtu 1400 -verbose true -smux true -tcp-nodelay true -heartbeat false -ping-interval 10 -service-name azumilocal"
             setup_service "$file" "$arguments"
             echo -e "${GREEN}Local IPv4 Kharej 30.0.0.2${NC}"
             echo -e "${BLUE}Local IPv4 Iran 30.0.0.1${NC}"
